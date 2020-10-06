@@ -47,6 +47,7 @@ class MyClient(discord.Client):
             self.turn = bool(getrandbits(1)) ### turn 1 ai turn -1 player
             self.flag = False
             self.last_msg = -1
+            self.reset_count = 0
         def reset_atr(self):
             self.ai = [-1,-1]
             self.player = [-1,-1]           
@@ -58,15 +59,24 @@ class MyClient(discord.Client):
             self.turn = bool(getrandbits(1)) ### turn 1 ai turn -1 player
             self.flag = False
             self.last_msg = -1
+            self.reset_count = 0
             return 
 
         async def on_ready(self):
                 print('Logged on as', self.user)
 
         async def on_message(self, message):
-            
             if message.author == self.user:
                 return
+
+            if message.content.startswith('!RESET!'):
+                if self.current_user != -1:
+                    await message.channel.send("<@!" + str(self.current_user) + "> me van a reiniciar csmsmmmsmsmsm")
+                    self.reset_count += 1
+                    if self.reset_count > 1:
+                        await message.channel.send("Bueno parece que <@!" + str(self.current_user) + "> me abandonó :(")
+                        self.reset_atr()
+
             if message.content.startswith('MICHIRESET'):
                 await message.channel.send("RESETEANDOGAGAGAGAGAGAGAA")
                 self.reset_atr()
