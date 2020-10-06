@@ -74,10 +74,14 @@ class MyClient(discord.Client):
                 
             if message.content.startswith('MICHISOR') or (self.flag and len(message.content) < 5):
                 if message.content.startswith('MICHISOR') and self.current_user != -1:
+                    if message.author.id == self.current_user: return
+                    else: await message.channel.send("Estoy jugando con la puta de <@!" + str(self.current_user) + ">")
                     return
 
                 if message.author.id != self.current_user and self.current_user != -1 and self.current_guild == message.author.guild.id: 
-                    #await message.channel.send("Estoy jugando con la puta de <@!" + str(self.current_user) + ">")
+                    m = [int(x) for x in message.content.split()]
+                    if 0 <= m[0] and m[0] < 3 and 0 <= m[1] and m[1] < 3 or message.content.startswith('MICHISOR'):
+                        await message.channel.send("Estoy jugando con la puta de <@!" + str(self.current_user) + ">")
                     return
                 if message.author.guild.id != self.current_guild and self.current_guild != -1 and message.content.startswith('MICHISOR'): 
                     await message.channel.send("Estoy jugando con los imbeciles de " + str(super().get_guild(self.current_guild).name))
@@ -111,7 +115,6 @@ class MyClient(discord.Client):
                         output += board_to_string(self.board)
                         output += "```"
                         embedfirst = discord.Embed(title=header, description=output, color=0x00ff00)
-                        #embedfirst.insert_field_at(0, name="<@!" + str(self.current_user) + "> SE VA A ENFRENTAR AL MICHISORRRR", value = "", inline=False)
                         await message.channel.send(embed=embedfirst)
 
                 while mm.check_winner(self.board)[0]:
