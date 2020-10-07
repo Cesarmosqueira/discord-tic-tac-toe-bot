@@ -119,13 +119,13 @@ class MyClient(discord.Client):
                 if not self.flag: 
                         self.flag = False
                         self.turn = bool(getrandbits(1))
-                        header = {True:"Es el turno de michisor", False: "Es tu turno"}[self.turn == -1] 
+                        header = "Es el turno de michisor" if self.turn != 1 else "Es tu turno" 
                         header += "\nTienes que enviar [fila] [columna]" if self.turn == 1 else ""
                         output = "```\n"
                         output += board_to_string(self.board)
                         output += "```"
                         embedfirst = discord.Embed(title=header, description=output, color=0x00ff00)
-                        await message.channel.send(embed=embedfirst)
+                        if self.turn == 1: await message.channel.send(embed=embedfirst)
 
                 while mm.check_winner(self.board)[0]:
                     self.current_user = message.author.id
