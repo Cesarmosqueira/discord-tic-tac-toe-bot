@@ -34,7 +34,6 @@ def board_to_string(board):
     return out[:-12]
 
 class MyClient(discord.Client):
-
         def __init__(self):
             super().__init__()
             self.ai = [-1,-1]
@@ -71,30 +70,30 @@ class MyClient(discord.Client):
 
             if message.content.startswith('!RESET!'):
                 if self.current_user != -1:
-                    await message.channel.send("<@!" + str(self.current_user) + "> me van a reiniciar csmsmmmsmsmsm")
+                    await message.channel.send("<@!" + str(self.current_user) + "> me van a reiniciar, welve")
                     self.reset_count += 1
                     if self.reset_count > 1:
                         await message.channel.send("Bueno parece que <@!" + str(self.current_user) + "> me abandonó :(")
                         self.reset_atr()
 
             if message.content.startswith('MICHIRESET'):
-                await message.channel.send("RESETEANDOGAGAGAGAGAGAGAA")
+                await message.channel.send("Reseteando Ga")
                 self.reset_atr()
                 return
                 
             if message.content.startswith('MICHISOR') or (self.flag and len(message.content) < 5):
                 if message.content.startswith('MICHISOR') and self.current_user != -1:
                     if message.author.id == self.current_user: return
-                    else: await message.channel.send("Estoy jugando con la puta de <@!" + str(self.current_user) + ">")
+                    else: await message.channel.send("Estoy jugando con <@!" + str(self.current_user) + ">")
                     return
 
                 if message.author.id != self.current_user and self.current_user != -1 and self.current_guild == message.author.guild.id: 
                     m = [int(x) for x in message.content.split()]
                     if 0 <= m[0] and m[0] < 3 and 0 <= m[1] and m[1] < 3 or message.content.startswith('MICHISOR'):
-                        await message.channel.send("Estoy jugando con la puta de <@!" + str(self.current_user) + ">")
+                        await message.channel.send("Estoy jugando con <@!" + str(self.current_user) + ">")
                     return
                 if message.author.guild.id != self.current_guild and self.current_guild != -1 and message.content.startswith('MICHISOR'): 
-                    await message.channel.send("Estoy jugando con los imbeciles de " + str(super().get_guild(self.current_guild).name))
+                    await message.channel.send("Estoy jugando con la g de " + str(super().get_guild(self.current_guild).name))
                     return
                 if self.flag:
                     self.player = [int(x) for x in message.content.split()]
@@ -167,7 +166,7 @@ class MyClient(discord.Client):
                         await self.last_msg.edit(embed=embedVar)
 
                     if w[0] == False:
-                        embedVar.insert_field_at(0, name = "Ha terminado el juego", value=mm.print_winner(w[1]) + "Manco de mierda", inline=False)
+                        embedVar.insert_field_at(0, name = "Ha terminado el juego", value=mm.print_winner(w[1]) + "Nub", inline=False)
                         embedVar.remove_field(1)
                         await self.last_msg.edit(embed=embedVar)
                         self.current_user = -1
