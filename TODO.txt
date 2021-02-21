@@ -1,7 +1,0 @@
-
-
-1. Multithreading 
-    - Works in one text channel at the time
-    - Multiple servers at once
-  
-2. Make the main code cleaner 
